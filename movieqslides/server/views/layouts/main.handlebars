@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en">
+   <head>
+      <title>MovieQ</title>
+	  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
+	  <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	  <style type="text/css">
+	     h2               { margin-top: 0px; }
+		 p.overview       { overflow: scroll; height: 165px; }
+		 div.row.movie    { margin-bottom: .5em; }
+		 span.review      { float: right; font-size: .5em; padding-top: 1em; }
+		 a.watched        { float: right; cursor: pointer; text-decoration; }
+	  </style>	  
+
+      <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+	  <script type="text/javascript">
+	   
+	      function loadMovies(obj){
+				      
+             $("#title").autocomplete({
+			   source: function(request, response) {
+			      var apiUrl = ['http://api.themoviedb.org/3/search/movie?query=', obj.value, '&api_key=1a6f86ad423cc5544304a6fe19960bd3'].join('');
+				  $.get(apiUrl, function(data){
+						response($.map(data.results, function (item){
+							return {
+								label: item.title,
+								value: item.id
+							};
+						})); 
+				  });				  
+			   },
+			   minLength: 3,
+			   select: function(e, ui) {
+					 $('#title').val(ui.item.label);
+					 $('input[name=movieid]').val(ui.item.value);
+			         return false;
+				  }
+			 });
+		   
+		  }
+		  
+		  function watchMovie(movieid) {
+  
+			 // Mark movie as "watched" on checkbox click:
+			 this.window.event.preventDefault();
+			 var movie = $(this).parents('.movie');
+			 $.post('/movie/' + movieid + '/watched', function(data){
+				movie.fadeOut();
+			 });
+  
+		  }		  
+	   
+	   </script>
+	  
+  </head> 
+   <body>
+  	 
+	   <div class="container">
+		  <h1 class="text-center">MovieQ</h1>
+		 {{{body}}}
+	   </div>		  
+
+   </body>
+</html>
