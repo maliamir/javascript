@@ -1,0 +1,29 @@
+html *
+{
+   font-size: 10;   font-family: Arial, Geneva, Helvetica, sans-serif;
+   color: #444;
+}
+
+table, th, tbody, td {
+    padding: 50 px; border-spacing: 200 px;
+    border: 0px solid black;
+}
+
+th
+{
+    background: rgb(187, 222, 245); color: rgb(127, 127, 128);
+}
+
+tr 
+{
+    background: rgb(235, 235, 235); 
+}
+
+tr.alt
+{
+    background: rgb(255, 255, 255); 
+}
+
+h3 {
+    color: '#7F7F7F'
+}

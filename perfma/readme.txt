@@ -1,0 +1,1 @@
+To start project cd into ./perma directory and run 'npm start'
