@@ -1,3 +1,9 @@
+### To start app
+To start project cd into ./performo directory and run 'npm start'
+
+
+### NOTE
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
