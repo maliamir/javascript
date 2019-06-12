@@ -1,5 +1,8 @@
 ### To start app
-To start project cd into ./performo directory and run 'npm start'
+- cd performo
+- npm config set proxy http://<host.name>:<port> # if required 
+- npm audit fix --force # to resolve any issues conflicting with installed node.js
+- npm start
 
 
 ### NOTE

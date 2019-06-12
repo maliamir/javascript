@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import settings from './settings.json';
+import Moment from 'moment';
 
 /**
  * Main component to display test results with heading and individual test details.
@@ -10,7 +11,6 @@ class ResultTable extends Component{
    render(){
       return(
          <div>
-            <h2>Remote Json Rendering</h2>
             {<GetResultJson />}
          </div>
       );
@@ -75,20 +75,33 @@ class ShowResult extends Component{
    render(){
     
     const {resultJson} = this.props; // assign prop.resultJson to local resultJson value
-
+    
+    Moment.locale('en');
+    
       return(
           
          <div>
-             <h3 >Test Result Data</h3>
-             <table width="60%"><tbody>
-                 <tr><th>Test Scenario</th><th>Execution Time(ms)</th></tr>
-                 <tr className="alt"><td>Sample Test1</td><td>300</td></tr>
-                 <tr><td>Sample Test2</td><td>600</td></tr>
-             {resultJson.map((testResult, index)=>{
-                 return <tr><td>{testResult.testName}</td><td>{testResult.executionTime}</td></tr>
-             })
-            }
-            </tbody>
+             <h3>Test Matrices</h3>
+             <table width="60%">
+                <tbody>
+                     {
+                        resultJson.map((testResult, i) => 
+                            <tr>
+                                <td>{i+1}. Results collected on {Moment(testResult.log_stamp).format('MM/DD/YYYY hh:mm:ss a')}<br/> 
+                                    <table width="100%">
+                                        <tbody>
+                                            <tr><th>Test Unit</th><th>Duration (ms)</th></tr>
+                                            {testResult.matrix.map((matrix, j) =>  
+                                               <tr><td>{matrix.testUnitName}</td><td>{matrix.duration}</td></tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                        )
+                     }
+                </tbody>
             </table>
          </div>
       );
