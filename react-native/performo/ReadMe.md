@@ -1,3 +1,5 @@
+[Demo](https://youtu.be/sr9Ig5rQgnU)
+
 ### Setup React Native
 
 export ALL_PROXY=http://<proxy_host>:<proxy_port>
